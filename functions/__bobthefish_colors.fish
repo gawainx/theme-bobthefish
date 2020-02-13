@@ -12,9 +12,9 @@ function __bobthefish_colors -S -a color_scheme -d 'Define colors used by bobthe
       set -x color_initial_segment_jobs     white blue --bold
 
       set -x color_path                     black white
-      set -x color_path_basename            black white --bold
+      set -x color_path_basename            black white -i
       set -x color_path_nowrite             magenta $colorfg
-      set -x color_path_nowrite_basename    magenta $colorfg --bold
+      set -x color_path_nowrite_basename    magenta $colorfg -i
 
       set -x color_repo                     green $colorfg
       set -x color_repo_work_tree           black $colorfg --bold

@@ -61,8 +61,9 @@ function __bobthefish_timestamp -S -d 'Show the current timestamp'
     set -q theme_date_format
     or set -l theme_date_format "+%c"
 
-    echo -n ' '
-    date $theme_date_format
+    echo -n '⌚️ '
+    echo "["(date $theme_date_format)"]"
+    # date $theme_date_format
 end
 
 function fish_right_prompt -d 'bobthefish is all about the right prompt'
@@ -73,7 +74,7 @@ function fish_right_prompt -d 'bobthefish is all about the right prompt'
 
     set_color $fish_color_autosuggestion
 
-    __bobthefish_cmd_duration
+    # __bobthefish_cmd_duration
     __bobthefish_timestamp
     set_color normal
 end

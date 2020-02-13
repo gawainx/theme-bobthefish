@@ -366,11 +366,12 @@ function __bobthefish_path_segment -S -a segment_dir -d 'Display a shortened for
             set directory (__bobthefish_basename "$segment_dir")
     end
 
-    echo -n $parent
+    echo -n $folder_glyph '' $parent
     set_color -b $segment_basename_color
     echo -ns $directory ' '
 end
 
+# mark changed
 function __bobthefish_finish_segments -S -d 'Close open prompt segments'
     if [ -n "$__bobthefish_current_bg" ]
         set_color normal
@@ -383,14 +384,20 @@ function __bobthefish_finish_segments -S -d 'Close open prompt segments'
         set_color $fish_color_autosuggestion
 
         if set -q theme_newline_prompt
-            echo -ens "$theme_newline_prompt"
+            # echo -ens "$aapl_glyph" "~>"
+            set_color normal
+            echo -ens $multiline_last_glyph
+            echo -ens "$aapl_glyph" "-> "
+            set_color normal
+            # echo -ns $right_black_arrow_glyph ' '
+            # set_color normal
         else if [ "$theme_powerline_fonts" = "no" ]
-            echo -ns '> '
+            echo -ens $multiline_last_glyph
         else
-            echo -ns "$right_arrow_glyph "
+            echo -ns "$right_balck_arrow_glyph "
         end
     else if [ "$theme_newline_cursor" = 'clean' ]
-        echo -ens "\n"
+        echo -ens "\n" 
     end
 
     set_color normal
@@ -676,6 +683,7 @@ function __bobthefish_prompt_user -S -d 'Display current user and hostname'
     and set -l display_hostname
 
     if set -q display_user
+        # set color
         __bobthefish_start_segment $color_username
         echo -ns (whoami)
     end
@@ -1060,9 +1068,11 @@ function fish_prompt -d 'bobthefish, a fish theme optimized for awesome'
     # Start each line with a blank slate
     set -l __bobthefish_current_bg
 
+    echo -ens $multiline_first_glyph
     # Status flags and input mode
-    __bobthefish_prompt_status $last_status
-    __bobthefish_prompt_vi
+    # __bobthefish_prompt_status $last_status
+    # __bobthefish_prompt_vi
+    
 
     # User / hostname info
     __bobthefish_prompt_user
@@ -1100,6 +1110,6 @@ function fish_prompt -d 'bobthefish, a fish theme optimized for awesome'
     else
         __bobthefish_prompt_dir $real_pwd
     end
-
+    # echo -ens $multiline_last_glyph
     __bobthefish_finish_segments
 end

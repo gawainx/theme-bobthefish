@@ -2,6 +2,8 @@ function __bobthefish_glyphs -S -d 'Define glyphs used by bobthefish'
   # Powerline glyphs
   set -x branch_glyph            \uE0A0
   set -x right_black_arrow_glyph \uE0B0
+  set -x multiline_first_glyph   \u256D\U2500
+  set -x multiline_last_glyph    \u2570\U2500
   set -x right_arrow_glyph       \uE0B1
   set -x left_black_arrow_glyph  \uE0B2
   set -x left_arrow_glyph        \uE0B3
@@ -13,6 +15,9 @@ function __bobthefish_glyphs -S -d 'Define glyphs used by bobthefish'
   set -x superuser_glyph         '$ '
   set -x bg_job_glyph            '% '
   set -x hg_glyph                \u263F
+  set -x folder_glyph            \uF07C
+  set -x aapl_glyph              \uF179
+  set -x swift_glyph             \uE755
 
   # Python glyphs
   set -x superscript_glyph       \u00B9 \u00B2 \u00B3
@@ -20,7 +25,7 @@ function __bobthefish_glyphs -S -d 'Define glyphs used by bobthefish'
   set -x pypy_glyph              \u1D56
 
   set -x ruby_glyph              ''
-  set -x go_glyph                ''
+  set -x go_glyph                \uE626
 
   # Desk glyphs
   set -x desk_glyph              \u25F2
@@ -41,8 +46,8 @@ function __bobthefish_glyphs -S -d 'Define glyphs used by bobthefish'
   set -x git_staged_glyph     '~'
   set -x git_stashed_glyph    '$'
   set -x git_untracked_glyph  '…'
-  set -x git_ahead_glyph      \u2191 # '↑'
-  set -x git_behind_glyph     \u2193 # '↓'
+  set -x git_ahead_glyph      '↑' # \u2191 # '↑'
+  set -x git_behind_glyph     '↓' # \u2193 # '↓'
   set -x git_plus_glyph       '+'
   set -x git_minus_glyph      '-'
   set -x git_plus_minus_glyph '±'
@@ -50,10 +55,10 @@ function __bobthefish_glyphs -S -d 'Define glyphs used by bobthefish'
   # Disable Powerline fonts (unless we're using nerd fonts instead)
   if [ "$theme_powerline_fonts" = "no" -a "$theme_nerd_fonts" != "yes" ]
     set branch_glyph            \u2387
-    set right_black_arrow_glyph ''
-    set right_arrow_glyph       ''
-    set left_black_arrow_glyph  ''
-    set left_arrow_glyph        ''
+    set right_black_arrow_glyph '>'
+    set right_arrow_glyph       '->'
+    set left_black_arrow_glyph  '<'
+    set left_arrow_glyph        '<-'
   end
 
   # Use prettier Nerd Fonts glyphs
