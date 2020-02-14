@@ -316,6 +316,33 @@ end
 # Segment functions
 # ==============================
 
+function __mid_start_segment -S -d 'Start a prompt segment'
+    set -l bg $argv[1]
+    set -e argv[1]
+    set -l fg $argv[1]
+    set -e argv[1]
+
+    set_color normal # clear out anything bold or underline...
+    set_color -b $bg $fg $argv
+
+    switch "$__bobthefish_current_bg"
+        case ''
+            # If there's no background, just start one
+            echo -n ' '
+        case "$bg"
+            # If the background is already the same color, draw a separator
+            # echo -n "bg"
+            echo -ns $right_arrow_glyph ' '
+        case '*'
+            # otherwise, draw the end of the previous segment and the start of the next
+            # set_color $__bobthefish_current_bg
+            # echo -ns $right_black_arrow_glyph ' '
+            set_color $fg $argv
+    end
+
+    set __bobthefish_current_bg $bg
+end
+
 function __bobthefish_start_segment -S -d 'Start a prompt segment'
     set -l bg $argv[1]
     set -e argv[1]
@@ -331,6 +358,7 @@ function __bobthefish_start_segment -S -d 'Start a prompt segment'
             echo -n ' '
         case "$bg"
             # If the background is already the same color, draw a separator
+            # echo -n "bg"
             echo -ns $right_arrow_glyph ' '
         case '*'
             # otherwise, draw the end of the previous segment and the start of the next
@@ -387,10 +415,9 @@ function __bobthefish_finish_segments -S -d 'Close open prompt segments'
             # echo -ens "$aapl_glyph" "~>"
             set_color normal
             echo -ens $multiline_last_glyph
-            echo -ens "$aapl_glyph" "-> "
+            segment black blue "\u2500$aapl_glyph~>>> "; segment_close
+            # echo -ens "$aapl_glyph~>>> " "~>>> "
             set_color normal
-            # echo -ns $right_black_arrow_glyph ' '
-            # set_color normal
         else if [ "$theme_powerline_fonts" = "no" ]
             echo -ens $multiline_last_glyph
         else
@@ -961,8 +988,18 @@ function __bobthefish_prompt_git -S -a git_root_dir -a real_pwd -d 'Display the 
 
     __bobthefish_path_segment $git_root_dir
 
-    __bobthefish_start_segment $flag_colors
-    echo -ns (__bobthefish_git_branch) $flags ' '
+    # set_color $__bobthefish_current_bg
+    set_color normal
+    set_color $__bobthefish_current_bg
+    echo -ns $right_black_arrow_glyph
+    set_color normal
+    
+    echo
+    echo -n $multiline_mid_glyph # multiline mid
+
+    # __bobthefish_start_segment $flag_colors # one param
+    __mid_start_segment $flag_colors
+    echo -ns ' ' (__bobthefish_git_branch) $flags ' '
     set_color normal
 
     if [ "$theme_git_worktree_support" != 'yes' ]

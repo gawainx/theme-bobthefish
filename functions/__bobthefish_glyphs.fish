@@ -3,6 +3,7 @@ function __bobthefish_glyphs -S -d 'Define glyphs used by bobthefish'
   set -x branch_glyph            \uE0A0
   set -x right_black_arrow_glyph \uE0B0
   set -x multiline_first_glyph   \u256D\U2500
+  set -x multiline_mid_glyph     \u251C\U2500
   set -x multiline_last_glyph    \u2570\U2500
   set -x right_arrow_glyph       \uE0B1
   set -x left_black_arrow_glyph  \uE0B2
